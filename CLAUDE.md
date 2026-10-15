@@ -76,3 +76,4 @@
 - ⚠️ HTTP 入口（server/http.js，阶段 6 起）：端口 `ERP_MCP_PORT`（默认 3000），单端点 `POST /mcp`；无状态模式（每请求一临时 transport，多客户端共享同一 Token 缓存）；CORS 已放开（浏览器前端前提）。Git Bash curl -d 传中文会搅坏字节（2026-10-14 实测），浏览器前端不受影响
 - ⚠️ Streamable HTTP 无状态模式必须**每请求新建 McpServer**（2026-10-14 Inspector 实测踩坑）：共享一个 McpServer 时，浏览器连接复用（keep-alive）会让第二个请求撞「Already connected … use a separate Protocol instance」炸进程——curl 六连没暴露是因为 curl 每次开新连接、用完即断。http.js 现每请求现场 new McpServer + registerTools（纯内存操作，Token 缓存仍在模块级共享），并有 try/catch 兜底（意外回 -32603，不炸进程）
 - ⚠️ 前端（frontend/，阶段 7/8 起）：零构建静态页——index.html 调试面板、chat.html AI 对话（DeepSeek deepseek-chat，非思考模型），双击即开；共享内核 mcp-client.js（Accept 头教训在码内）。**凭据约定：LLM API key 只存浏览器 localStorage，绝不写入代码文件或文档**——用户提供过的 key 建议用后重置（2026-10-15 约定）
+- ⚠️ 项目已推送 GitHub（2026-10-15，Round 19）：仓库 https://github.com/ksmingkimo/mcp（public，用户手动建仓）；本地 main 跟踪 origin/main；文档中 AT01/SAN 为演示账号（用户澄清，无脱敏要求）；.gitignore 排除 node_modules/.env*（新增文档后先 commit 再 push）
