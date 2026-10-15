@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ERP MCP 对话</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>ERP MCP 对话</h1>
+    <div id="connStatus" class="conn-pending">正在连接 MCP 服务器…</div>
+    <label class="key-box">
+      DeepSeek Key
+      <input type="password" id="apiKey" placeholder="粘贴 sk- 开头的 key，只存本机浏览器">
+    </label>
+  </header>
+
+  <main id="chatMain">
+    <!-- 消息流：用户气泡 / AI 气泡 / 工具调用过程卡片 -->
+    <div id="chatLog"></div>
+  </main>
+
+  <footer id="chatInput">
+    <textarea id="userInput" rows="2" placeholder="试试问：特斯拉 8 月的受订单有多少？"></textarea>
+    <button id="sendBtn" disabled>发送</button>
+  </footer>
+
+  <script src="mcp-client.js"></script>
+  <script src="chat.js"></script>
+</body>
+</html>
